@@ -1,0 +1,143 @@
+---
+interface Props {
+  searchQuery: string;
+  selectedPlatform: string;
+  sortBy: 'version' | 'date';
+  sortOrder: 'asc' | 'desc';
+}
+
+const { searchQuery, selectedPlatform, sortBy, sortOrder } = Astro.props;
+---
+
+<div class="filters">
+  <div class="search-box">
+    <input
+      type="text"
+      id="search"
+      placeholder="Search by version number..."
+      value={searchQuery}
+      class="search-input"
+    />
+    <svg class="search-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+    </svg>
+  </div>
+
+  <div class="filter-group">
+    <label for="platform">Platform:</label>
+    <select id="platform" class="select-input">
+      <option value="">All Platforms</option>
+      <option value="win32-x64" selected={selectedPlatform === 'win32-x64'}>Windows x64</option>
+      <option value="win32-arm64" selected={selectedPlatform === 'win32-arm64'}>Windows ARM64</option>
+      <option value="darwin-universal" selected={selectedPlatform === 'darwin-universal'}>macOS Universal</option>
+      <option value="darwin-x64" selected={selectedPlatform === 'darwin-x64'}>macOS Intel</option>
+      <option value="darwin-arm64" selected={selectedPlatform === 'darwin-arm64'}>macOS Apple Silicon</option>
+      <option value="linux-x64" selected={selectedPlatform === 'linux-x64'}>Linux x64</option>
+      <option value="linux-arm64" selected={selectedPlatform === 'linux-arm64'}>Linux ARM64</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label for="sort-by">Sort by:</label>
+    <select id="sort-by" class="select-input">
+      <option value="version" selected={sortBy === 'version'}>Version</option>
+      <option value="date" selected={sortBy === 'date'}>Date</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label for="sort-order">Order:</label>
+    <select id="sort-order" class="select-input">
+      <option value="desc" selected={sortOrder === 'desc'}>Newest First</option>
+      <option value="asc" selected={sortOrder === 'asc'}>Oldest First</option>
+    </select>
+  </div>
+</div>
+
+<style>
+  .filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    padding: 1.5rem;
+    background-color: var(--color-bg-secondary);
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-border);
+  }
+
+  .search-box {
+    position: relative;
+    flex: 1;
+    min-width: 250px;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-secondary);
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .filter-group label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+
+  .select-input {
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    min-width: 140px;
+  }
+
+  .select-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .filters {
+      flex-direction: column;
+    }
+
+    .search-box {
+      min-width: 100%;
+    }
+
+    .filter-group {
+      width: 100%;
+    }
+
+    .select-input {
+      width: 100%;
+    }
+  }
+</style>
