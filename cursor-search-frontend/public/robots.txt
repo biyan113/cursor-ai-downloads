@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cursor-download-hub.vercel.app/sitemap.xml

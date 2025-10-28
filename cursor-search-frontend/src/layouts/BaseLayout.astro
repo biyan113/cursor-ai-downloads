@@ -4,9 +4,16 @@ import { Download } from 'lucide-react';
 export interface Props {
   title: string;
   description?: string;
+  keywords?: string;
+  canonical?: string;
 }
 
-const { title, description = 'Search and download Cursor AI editor versions' } = Astro.props;
+const { 
+  title, 
+  description = 'Search and download Cursor AI editor versions', 
+  keywords = 'Cursor AI, Cursor editor, Cursor download, AI code editor, Cursor versions, Cursor IDE, AI programming, code editor download, Cursor AI editor, artificial intelligence, programming tools, developer tools',
+  canonical = 'https://cursor-download-hub.vercel.app'
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -16,8 +23,36 @@ const { title, description = 'Search and download Cursor AI editor versions' } =
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Cursor Download Hub" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
     <meta name="generator" content={Astro.generator} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${canonical}/favicon.svg`} />
+    <meta property="og:site_name" content="Cursor Download Hub" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonical} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={`${canonical}/favicon.svg`} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonical} />
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#6366f1" />
+    <meta name="msapplication-TileColor" content="#6366f1" />
+    
     <title>{title}</title>
+  +++++++ REPLACE
 
     <style>
       :root {
